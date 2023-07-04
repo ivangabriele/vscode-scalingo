@@ -2,7 +2,7 @@
   "name": "vscode-scalingo",
   "description": "Check your project's Scalingo deployment status.",
   "license": "MIT",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "engines": {
     "node": ">=16",
     "vscode": "^1.79.2"
