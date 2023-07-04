@@ -1,0 +1,126 @@
+{
+  "name": "vscode-scalingo",
+  "description": "Check your project's Scalingo deployment status.",
+  "license": "MIT",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=16",
+    "vscode": "^1.79.2"
+  },
+  "main": "./build/extension.js",
+  "scripts": {
+    "build": "rollup -c",
+    "bundle": "rm -Rf *.vsix && vsce package",
+    "clean": "rm -Rf ./build",
+    "prepare": "husky install",
+    "release": "semantic-release && vsce publish --yarn",
+    "pretest": "yarn clean && yarn build",
+    "test": "yarn test:lint && yarn test:inte",
+    "test:docker": "./scripts/run_tests_in_docker.sh",
+    "test:e2e": "node ./build/test/runTest.js",
+    "test:lint": "eslint .",
+    "test:type": "tsc --noEmit",
+    "watch": "yarn clean && yarn build"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.6.6",
+    "@ivangabriele/commitlint-config": "1.1.0",
+    "@ivangabriele/eslint-config-typescript-base": "7.1.1",
+    "@ivangabriele/prettier-config": "3.1.0",
+    "@ivangabriele/semantic-release-config-no-npm": "3.0.3",
+    "@ivangabriele/tsconfig-node": "1.2.2",
+    "@rollup/plugin-commonjs": "25.0.2",
+    "@rollup/plugin-node-resolve": "15.1.0",
+    "@swc/core": "1.3.67",
+    "@types/mocha": "10.0.1",
+    "@types/node": "20.3.3",
+    "@types/vscode": "1.79.1",
+    "@typescript-eslint/eslint-plugin": "5.60.1",
+    "@typescript-eslint/parser": "5.60.1",
+    "@vscode/test-electron": "2.3.3",
+    "@vscode/vsce": "2.19.0",
+    "dayjs": "1.11.9",
+    "eslint": "8.44.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-airbnb-typescript": "17.0.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jest": "27.2.2",
+    "eslint-plugin-no-null": "1.0.2",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-sort-destructure-keys": "1.5.0",
+    "eslint-plugin-sort-keys-fix": "1.1.2",
+    "eslint-plugin-typescript-sort-keys": "2.3.0",
+    "execa": "7.1.1",
+    "glob": "10.3.1",
+    "husky": "8.0.3",
+    "is-command": "2.0.2",
+    "lint-staged": "13.2.3",
+    "mocha": "10.2.0",
+    "moment": "2.29.4",
+    "prettier": "2.8.8",
+    "rollup": "3.26.0",
+    "rollup-plugin-swc3": "0.8.2",
+    "semantic-release": "21.0.6",
+    "tslib": "2.6.0",
+    "typescript": "5.1.6"
+  },
+  "//": "https://github.com/okonet/lint-staged/issues/825#issuecomment-674575655",
+  "lint-staged": {
+    "*.{json,md,yaml,yml}": "prettier --write",
+    "*.{ts,tsx}": [
+      "yarn eslint --ext js,jsx,ts,tsx",
+      "bash -c 'npm run test:type'"
+    ]
+  },
+  "packageManager": "yarn@3.6.1",
+  "prettier": "@ivangabriele/prettier-config",
+  "release": {
+    "extends": "@ivangabriele/semantic-release-config-no-npm"
+  },
+  "displayName": "Scalingo",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.vscode-scalingo.linkWorkspaceToScalingoApp",
+        "title": "Scalingo: Link current workspace to an existing Scalingo app"
+      },
+      {
+        "command": "extension.vscode-scalingo.logInToScalingoCli",
+        "title": "Scalingo: Log In to Scalingo CLI"
+      },
+      {
+        "command": "extension.vscode-scalingo.logOutOfScalingoCli",
+        "title": "Scalingo: Log Out of Scalingo CLI"
+      }
+    ]
+  },
+  "author": {
+    "name": "Ivan Gabriele",
+    "email": "ivan.gabriele@gmail.com",
+    "url": "https://www.ivangabriele.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ivangabriele/vscode-scalingo/issues"
+  },
+  "categories": [
+    "Other"
+  ],
+  "homepage": "https://github.com/ivangabriele/vscode-scalingo#readme",
+  "icon": "./res/icon.png",
+  "keywords": [
+    "extension",
+    "scalingo",
+    "vsc",
+    "vscode",
+    "visual studio code"
+  ],
+  "publisher": "ivangabriele",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivangabriele/vscode-scalingo.git"
+  }
+}
